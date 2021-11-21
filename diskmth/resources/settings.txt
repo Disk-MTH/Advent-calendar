@@ -1,0 +1,3 @@
+music : enable
+sound effects : enable
+volume : 80
