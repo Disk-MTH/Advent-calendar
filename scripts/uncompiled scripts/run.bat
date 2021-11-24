@@ -1,5 +1,8 @@
+@echo off
+
 cd ..
 cd diskmth
+
 set srcPath=%cd%
 
 cd ..

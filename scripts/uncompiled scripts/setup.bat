@@ -1,11 +1,15 @@
 @echo off
 
-set zipPath='%cd%\python.zip'
-cd %~dp0
+set zipPath=%MYFILES%
+
 cd ..
-set decompPath='%cd%\python'
+
+set decompPath=%cd%
 
 echo Python environment decompiling !
-powershell -Command "Expand-Archive %zipPath% -DestinationPath %decompPath% -Force"
+
+powershell Expand-Archive -LiteralPath '%zipPath%\python.zip' -DestinationPath '%decompPath%\python' -Force
+
 echo Done !
+
 pause

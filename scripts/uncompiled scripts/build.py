@@ -18,8 +18,9 @@ def getAllResourcesPath():
 
 def getFullCommand():
     resourcesList = getAllResourcesPath()
-    command = "--onefile --windowed --clean"
+    command = "--onefile --windowed --clean --name \"Advent calendar\""
     command = "\"" + os.path.abspath("..\\python\\Scripts\\pyinstaller.exe").replace("\\", "/") + "\" " + command
+    command = "\"" + os.path.abspath("..\\python\\python.exe").replace("\\", "/") + "\" " + command
 
     if os.path.exists("..\\diskmth\\resources\\icons\\app_icon.ico"):
         command = command + " --icon \"" + os.path.abspath("..\\diskmth\\resources\\icons\\app_icon.ico").replace("\\", "/") + "\""

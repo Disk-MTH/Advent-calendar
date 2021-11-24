@@ -1,8 +1,8 @@
 @echo off
 
-set buildScriptPath=%cd%\build.py
-cd %~dp0
+set buildScriptPath=%MYFILES%
+
 cd ..
 cd python
 
-start python.exe %buildScriptPath%"
+start /wait python.exe "%buildScriptPath%\build.py"

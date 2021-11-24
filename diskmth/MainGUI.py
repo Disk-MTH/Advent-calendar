@@ -1,7 +1,6 @@
 from tkinter import *
 import Utils
 import ConfigGUI
-import Draw
 
 def mainGUI():
 
@@ -17,8 +16,10 @@ def mainGUI():
     backgroundPicture = PhotoImage(file=Utils.getResourcesPath("resources\\main_background.png"))
     titleBarPicture = PhotoImage(file=Utils.getResourcesPath("resources\\main_title_bar.png"))
     movePicture = PhotoImage(file=Utils.getResourcesPath("resources\\main_move.png"))
-    creditsPicture = PhotoImage(file=Utils.getResourcesPath("resources\\main_credits.png"))
-    
+    try:
+        creditsPicture = PhotoImage(file=Utils.getResourcesPath("resources\\main_credits.png"))
+    except TclError:
+        pass
 
     configPicture = PhotoImage(file=Utils.getResourcesPath("resources\\buttons\\main_config.png"))
     reducePicture = PhotoImage(file=Utils.getResourcesPath("resources\\buttons\\main_reduce.png"))
@@ -73,10 +74,6 @@ def mainGUI():
         closeFrame()
         ConfigGUI.configGUI()
 
-    def test():
-        closeFrame()
-        Draw.day1draw()
-
     def createAButton(image, command):
         return Button(image=image, bd=0, highlightthickness=0, padx=67, pady=67, command=command)
 
@@ -96,8 +93,11 @@ def mainGUI():
     titleBar = Label(image=titleBarPicture, width=1000, height=45, bd=0)
     titleBar.place(x=0, y=0)
 
-    credits = Label(image=creditsPicture, width=198, height=50, bd=0)
-    credits.place(x=800, y=600)
+    try:
+        credits = Label(image=creditsPicture, width=198, height=50, bd=0)
+        credits.place(x=800, y=600)
+    except UnboundLocalError:
+        pass
 
     moveArea = Label(image=movePicture, width=43, height=43, bd=0)
     moveArea.place(x=0, y=0)

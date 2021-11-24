@@ -24,26 +24,28 @@ If during one of the following steps a SmartScreen window opens saying
 "SmartScreen to protect your computer", this is normal: the .exe files (which I made 
 entirely myself) do not have a digital signature therefore windows defender is in panic. 
 (If ever you do not trust my scripts do not go further because you will necessarily 
-need them! Moreover you can see their "contents" in the "uncompiled scripts" folder).
+need them! Moreover you can see their "contents" in the "[uncompiled scripts](https://github.com/Disk-MTH/Advent-calendar/tree/master/scripts/uncompiled%20scripts)" folder).
 
 Once the environment is setup (see below), it will take VERY long to move the folder, 
 so choose a "permanent" location!
 
-###Use :
+### Use :
 
 1) Download :
 
 To start, above the frame containing the code, there is a green button titled "Code", 
-click on it, then on "Download ZIP" (or use this link). This will download you a .zip 
-folder which you will need to extract (I recommend extracting to the desktop). 
+click on it, then on "Download ZIP" (or use [this link](https://github.com/Disk-MTH/Advent-calendar/archive/refs/heads/master.zip)). This will download you a .zip 
+folder which you will need to extract (I recommend extracting to a "permanet" location). 
 
 2) Setup :
 
-(Warning : This step can be very long (depends on your computer)) Then in the 
-unzipped folder find the "scripts" folder and run the "setup.exe" file. This will open a 
-window of the control terminal in which you will be able to follow the decompilation of 
-the integrated python interpreter. (If you go back to the root folder of the project you 
-can find a "python" folder that has been created).
+(Warning : This step can be very long (depends on your computer))
+
+Then in the unzipped folder find the "[scripts](https://github.com/Disk-MTH/Advent-calendar/tree/master/scripts)" folder and run the "setup.exe" 
+file. This will open a window of the control terminal in which you will be able to 
+follow the decompilation of the integrated python interpreter. (If you go back to 
+the root folder of the project you can find a "python" folder that has been 
+created).
 
 /!\ : In case of update, if you recompile the python environment, it will overwrite the old 
 one
@@ -51,7 +53,7 @@ one
 3) Run :
 
 To launch the application you simply need to run the "run.exe" file that you may have 
-seen in the "scripts" folder.
+seen in the "[scripts](https://github.com/Disk-MTH/Advent-calendar/tree/master/scripts)" folder.
 
 4) Build :
 
@@ -66,13 +68,13 @@ that still does not work open an issue).
 /!\ : If you ever rebuild the program after making changes, the program will overwrite 
 the old build files.
 
-###Edit :
+### Edit :
 
 1) Title bar :
 
 The app's title bar is an image overlaid on top of the rest, so you can edit it if 
 you want. To do this, I provide you with the image of the blank title bar in the 
-"pictures" folder. Have image editing software you can add whatever you want. 
+"[pictures](https://github.com/Disk-MTH/Advent-calendar/tree/master/pictures)" folder. Have image editing software you can add whatever you want. 
 (To make the default title bar I used the "Segoe Script" font in size 18). Once 
 modified save it in the following path: "youtProjectPath/diskmth/resources" 
 with the following name: "main_title_bar" in ".png" format.
