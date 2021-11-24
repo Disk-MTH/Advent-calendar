@@ -1,7 +1,8 @@
-set srcPath=%cd%
+@echo off
 
+set buildScriptPath=%cd%\build.py
+cd %~dp0
 cd ..
-cd env
-cd Scripts
+cd python
 
-python.exe "%srcPath%\build.py"
+start python.exe %buildScriptPath%"

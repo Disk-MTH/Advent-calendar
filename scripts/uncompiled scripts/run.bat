@@ -3,7 +3,6 @@ cd diskmth
 set srcPath=%cd%
 
 cd ..
-cd env
-cd Scripts
+cd python
 
-cmd /k python.exe "%srcPath%\Main.py"
+start pythonw.exe "%srcPath%\Main.py"
