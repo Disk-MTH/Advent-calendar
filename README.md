@@ -2,6 +2,11 @@
 This project is under development, so it is not complete. All that is indicated below is 
 therefore not yet contractual.
 
+This project does not require any administrator permission, either for the setup 
+of the environment or for the build of the project. So you can use this project 
+on any windows computer. (If you are ever asked for permissions open an 
+issue so I can see what this is due to)
+
 ## Presentation
 This github repository is a remake of my "[Christmas card](https://github.com/Disk-MTH/Christmas-card)" project resulting from a work requested in a maths 
 lesson. The original project was fun to make but this version lets you tweak what's behind the calendar boxes.  In this projects I therefore use tkinter for the GUI, pygame for sounds, threading for concurrent 
@@ -47,7 +52,7 @@ follow the decompilation of the integrated python interpreter. (If you go back t
 the root folder of the project you can find a "python" folder that has been 
 created).
 
-/!\ : In case of update, if you recompile the python environment, it will overwrite the old 
+/!\ : In case of update, if you resetup the python environment, it will overwrite the old 
 one
 
 3) Run :
@@ -79,7 +84,21 @@ you want. To do this, I provide you with the image of the blank title bar in the
 modified save it in the following path: "youtProjectPath/diskmth/resources" 
 with the following name: "main_title_bar" in ".png" format.
 
-2) Pictures behind the day buttons :
+2) Credits :
+
+You can remove the credits at the bottom right of the main GUI (this is just an 
+overlay image). To do this you just need to go to the [resources](https://github.com/Disk-MTH/Advent-calendar/tree/master/diskmth/resources) folder 
+and delete the [main_credits.png](https://github.com/Disk-MTH/Advent-calendar/blob/master/diskmth/resources/main_credits.png) image. (If you are reusing the project in any way, 
+please cite this repository link to give me visibility for my future projects)
+
+3) App icon :
+
+To change the application icon during build, go to the [resources](https://github.com/Disk-MTH/Advent-calendar/tree/master/diskmth/resources) folder, then to 
+icons and put your icon with the name "[app_icon]([resources](https://github.com/Disk-MTH/Advent-calendar/tree/master/diskmth/resources))" in ".ico" format. If you have 
+an image in another format, it won't work and the build will crash. To convert 
+your images to ".ico" format, I recommend the "[convertio](https://convertio.co/fr/)" website.
+
+4) Pictures behind the day buttons :
 
 soon ...
 
@@ -91,12 +110,6 @@ MainGUI :
 ConfigGUI :
 
 ![Screenshot 2](pictures/config_gui.png)
-
-## Informations
-So that you can recover the background image, that you can modify and 
-redistribute this project, the credits are an overlay image so you can remove it. 
-(If you are reusing the project in any way, please cite this repository link to give 
-me visibility for my future projects).
 
 ## License
 All the files in this repository are completely free of rights (see the [license](https://github.com/Disk-MTH/Advent-calendar/blob/master/license.txt)) so 

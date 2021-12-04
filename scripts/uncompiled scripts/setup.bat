@@ -1,6 +1,6 @@
 @echo off
 
-set zipPath=%MYFILES%
+set zipPath=%cd%
 
 cd ..
 

@@ -1,6 +1,6 @@
 @echo off
 
-set buildScriptPath=%MYFILES%
+set buildScriptPath=%cd%
 
 cd ..
 cd python
