@@ -2,157 +2,174 @@ from tkinter import *
 import MainGUI
 import Utils
 
-def configGUI():
-    #                            Create frame                               #
+
+def config_gui():
+    # Create the frame
 
     root = Tk()
 
-    #                 Initialisation of some useful variables                #
+    # Initialisation of some useful variables
 
-    lastClickX = 0
-    lastClickY = 0
+    last_click_x = 0
+    last_click_y = 0
 
-    backgroundPicture = PhotoImage(file=Utils.getResourcesPath("resources\\config_background.png"))
-    titleBarPicture = PhotoImage(file=Utils.getResourcesPath("resources\\config_title_bar.png"))
-    movePicture = PhotoImage(file=Utils.getResourcesPath("resources\\config_move.png"))
-    toggleMusicPicture = PhotoImage(file=Utils.getResourcesPath("resources\\config_toggle_music.png"))
-    toggleSoundEffectsPicture = PhotoImage(file=Utils.getResourcesPath("resources\\config_toggle_sound_effects.png"))
-    resetConfigPicture = PhotoImage(file=Utils.getResourcesPath("resources\\config_reset_config.png"))
+    # Definition of some useful functions
 
-    reducePicture = PhotoImage(file=Utils.getResourcesPath("resources\\buttons\\config_reduce.png"))
-    closePicture = PhotoImage(file=Utils.getResourcesPath("resources\\buttons\\config_close.png"))
-    soundOnPicture = PhotoImage(file=Utils.getResourcesPath("resources\\buttons\\sound_on.png"))
-    soundOffPicture = PhotoImage(file=Utils.getResourcesPath("resources\\buttons\\sound_off.png"))
-    resetConfigButtonPicture = PhotoImage(file=Utils.getResourcesPath("resources\\buttons\\reset_config.png"))
+    def get_picture(path):
+        try:
+            print("aaa"
+                  "")
+            return PhotoImage(file=Utils.get_resources_path("resources\\" + path))
+        except TclError:
+            print("called")
 
-    #                Initialisation of some useful functions                #
-
-    def moveFrame(event):
-        x, y = event.x - lastClickX + root.winfo_x(), event.y - lastClickY + root.winfo_y()
+    def move_frame(event):
+        x, y = event.x - last_click_x + root.winfo_x(), event.y - last_click_y + root.winfo_y()
         root.geometry("+%s+%s" % (x, y))
 
-    def mappedFrame(event):
+    def mapped_frame(event):
         root.overrideredirect(True)
 
-    def reduceFrame():
-        Utils.buttonClick("button_reduce")
+    def reduce_frame():
+        Utils.button_click_sound(False)
         root.state('withdrawn')
         root.overrideredirect(False)
         root.state('iconic')
 
-    def closeFrame():
-        Utils.buttonClick("button_close")
+    def close_frame():
+        Utils.button_click_sound(False)
         root.destroy()
-        MainGUI.mainGUI()
+        MainGUI.main_gui()
 
-    def refreshFrame(event):
-        if Utils.getSettingValue("music"):
-            button_toggle_music.config(image=soundOnPicture)
-        elif not Utils.getSettingValue("music"):
-            button_toggle_music.config(image=soundOffPicture)
+    sound_on_picture = PhotoImage(file=get_picture("buttons\\sound_on.png"))
+    sound_off_picture = PhotoImage(file=get_picture("buttons\\sound_off.png"))
 
-        if Utils.getSettingValue("sound_effects"):
-            button_toggle_sound_effects.config(image=soundOnPicture)
-        elif not Utils.getSettingValue("sound_effects"):
-            button_toggle_sound_effects.config(image=soundOffPicture)
+    #sound_on_picture = PhotoImage(file=Utils.get_resources_path("resources\\" + "buttons\\sound_on.png"))
+    #sound_off_picture = PhotoImage(file=Utils.get_resources_path("resources\\" + "buttons\\sound_off.png"))
 
-        volume_control.set(Utils.getSettingValue("volume"))
-        volume_value.config(text=Utils.getSettingValue("volume") + " %")
+    def get_picture_for_toggle_buttons(button):
+        if button == "music":
+            if Utils.get_setting_value("music"):
+                return sound_on_picture
+            elif not Utils.get_setting_value("music"):
+                return sound_off_picture
+        elif button == "sound_effects":
+            if Utils.get_setting_value("sound_effects"):
+                return sound_on_picture
+            elif not Utils.get_setting_value("sound_effects"):
+                return sound_off_picture
 
-    def toggleMusic():
-        Utils.buttonClick("button_toggle_music")
-        if Utils.getSettingValue("music"):
-            button_toggle_music.config(image=soundOffPicture)
-            Utils.setSettingValue("music", "toggleOff")
-        elif not Utils.getSettingValue("music"):
-            button_toggle_music.config(image=soundOnPicture)
-            Utils.setSettingValue("music", "toggleOn")
+    def toggle(button):
+        Utils.button_click_sound(False)
+        if button == "music":
+            if Utils.get_setting_value("music"):
+                button_toggle_music.config(image=sound_off_picture)
+                Utils.set_setting_value("music", False)
+            elif not Utils.get_setting_value("music"):
+                button_toggle_music.config(image=sound_on_picture)
+                Utils.set_setting_value("music", True)
+        elif button == "sound_effects":
+            if Utils.get_setting_value("sound_effects"):
+                button_toggle_sound_effects.config(image=sound_off_picture)
+                Utils.set_setting_value("sound_effects", False)
+            elif not Utils.get_setting_value("sound_effects"):
+                button_toggle_sound_effects.config(image=sound_on_picture)
+                Utils.set_setting_value("sound_effects", True)
 
-    def toggleSoundEffects():
-        Utils.buttonClick("button_toggle_sound_effects")
-        if Utils.getSettingValue("sound_effects"):
-            button_toggle_sound_effects.config(image=soundOffPicture)
-            Utils.setSettingValue("sound_effects", "toggleOff")
-        elif not Utils.getSettingValue("sound_effects"):
-            button_toggle_sound_effects.config(image=soundOnPicture)
-            Utils.setSettingValue("sound_effects", "toggleOn")
+    def set_volume(volume):
+        Utils.set_setting_value("volume", str(volume))
+        label_volume_value.config(text=str(volume) + " %")
 
-    def setVolume(volume):
-        Utils.setSettingValue("volume", str(volume))
-        volume_value.config(text=Utils.getSettingValue("volume") + " %")
+    def reset_config():
+        Utils.button_click_sound(False)
+        Utils.reset_config()
 
-    def getPictureForButton(buttonName):
-        if buttonName == "music":
-            if Utils.getSettingValue("music"):
-                return soundOnPicture
-            elif not Utils.getSettingValue("music"):
-                return soundOffPicture
-        elif buttonName == "sound_effects":
-            if Utils.getSettingValue("sound_effects"):
-                return soundOnPicture
-            elif not Utils.getSettingValue("sound_effects"):
-                return soundOffPicture
+    def refresh_frame(event):
+        if Utils.get_setting_value("music"):
+            button_toggle_music.config(image=sound_on_picture)
+        elif not Utils.get_setting_value("music"):
+            button_toggle_music.config(image=sound_off_picture)
 
-    def resetConfig():
-        Utils.buttonClick("button_reset_config")
-        Utils.resetConfig()
+        if Utils.get_setting_value("sound_effects"):
+            button_toggle_sound_effects.config(image=sound_on_picture)
+        elif not Utils.get_setting_value("sound_effects"):
+            button_toggle_sound_effects.config(image=sound_off_picture)
 
-    #                      Set frame basics parameters                       #
+        scale_volume_control.set(Utils.get_setting_value("volume"))
+        label_volume_value.config(text=Utils.get_setting_value("volume") + " %")
+
+    # Set basic parameters of frame
 
     root.wm_attributes("-topmost", 1)
     root.geometry("200x200")
     root.resizable(width=False, height=False)
-    root.iconbitmap(Utils.getResourcesPath("resources\\icons\\app_icon.ico"))
-    root.bind("<Map>", mappedFrame)
+    root.iconbitmap(Utils.get_resources_path("resources\\icons\\app_icon.ico"))
+    root.bind("<Map>", mapped_frame)
 
-    #                        Add components to frame                         #
+    # Add components to frame
 
-    root.bind("<Enter>", refreshFrame)
+    root.bind("<Enter>", refresh_frame)
 
-    background = Label(image=backgroundPicture, width=200, height=200, bd=0)
-    background.place(x=0, y=0)
+    label_background_picture = get_picture("config_background.png")
+    label_background = Label(image=label_background_picture, width=200, height=200, bd=0)
+    label_background.place(x=0, y=0)
 
-    title_bar = Label(image=titleBarPicture, width=200, height=30, bd=0)
-    title_bar.place(x=0, y=0)
+    label_title_bar_picture = get_picture("config_title_bar.png")
+    label_title_bar = Label(image=label_title_bar_picture, width=200, height=30, bd=0)
+    label_title_bar.place(x=0, y=0)
 
-    move_area = Label(image=movePicture, width=28, height=28, bd=0)
-    move_area.place(x=0, y=0)
-    move_area.bind("<B1-Motion>", moveFrame)
+    label_move_area_picture = get_picture("config_move.png")
+    label_move_area = Label(image=label_move_area_picture, width=28, height=28, bd=0)
+    label_move_area.place(x=0, y=0)
+    label_move_area.bind("<B1-Motion>", move_frame)
 
-    toggle_music = Label(image=toggleMusicPicture, width=80, height=20, bd=0)
-    toggle_music.place(x=50, y=50)
+    label_toggle_music_picture = get_picture("config_toggle_music.png")
+    label_toggle_music = Label(image=label_toggle_music_picture, width=80, height=20, bd=0)
+    label_toggle_music.place(x=50, y=50)
 
-    toggle_sound_effects = Label(image=toggleSoundEffectsPicture, width=115, height=20, bd=0)
-    toggle_sound_effects.place(x=50, y=80)
+    label_toggle_sound_effects_picture = get_picture("config_toggle_sound_effects.png")
+    label_toggle_sound_effects = Label(image=label_toggle_sound_effects_picture, width=115, height=20, bd=0)
+    label_toggle_sound_effects.place(x=50, y=80)
 
-    reset_config = Label(image=resetConfigPicture, width=70, height=15, bd=0)
-    reset_config.place(x=56, y=132)
+    label_reset_config_picture = get_picture("config_reset_config.png")
+    label_reset_config = Label(image=label_reset_config_picture, width=70, height=15, bd=0)
+    label_reset_config.place(x=56, y=132)
 
-    volume = Label(text="Volume : ", font=("Segoe Script", 8), bd=0, bg="white")
-    volume.place(x=25, y=160)
+    label_volume = Label(text="Volume : ", font=("Segoe Script", 8), bd=0, bg="white")
+    label_volume.place(x=25, y=160)
 
-    volume_value = Label(text=Utils.getSettingValue("volume") + " %", font=("Segoe Script", 8), bd=0, bg="white")
-    volume_value.place(x=80, y=160)
+    label_volume_value = Label(text=Utils.get_setting_value("volume") + " %", font=("Segoe Script", 8),
+                               bd=0, bg="white")
+    label_volume_value.place(x=80, y=160)
 
-    button_reduce = Button(image=reducePicture, bd=0, highlightthickness=0, padx=32, pady=28, command=reduceFrame)
+    button_reduce_picture = get_picture("buttons\\config_reduce.png")
+    button_reduce = Button(image=button_reduce_picture, bd=0, highlightthickness=0,
+                           padx=32, pady=28, command=reduce_frame)
     button_reduce.place(x=140, y=0)
 
-    button_close = Button(image=closePicture, bd=0, highlightthickness=0, padx=28, pady=28, command=closeFrame)
+    button_close_picture = get_picture("buttons\\config_close.png")
+    button_close = Button(image=button_close_picture, bd=0, highlightthickness=0, padx=28, pady=28, command=close_frame)
     button_close.place(x=172, y=0)
 
-    button_toggle_music = Button(image=getPictureForButton("music"), bd=0, highlightthickness=0, padx=40, pady=40, command=toggleMusic)
+    button_toggle_music = Button(image=get_picture_for_toggle_buttons("music"), bd=0, highlightthickness=0, padx=40,
+                                 pady=40, command=lambda: toggle("music"))
     button_toggle_music.place(x=25, y=50)
 
-    button_toggle_sound_effects = Button(image=getPictureForButton("sound_effects"), bd=0, highlightthickness=0, padx=40, pady=40, command=toggleSoundEffects)
+    button_toggle_sound_effects = Button(image=get_picture_for_toggle_buttons("sound_effects"), bd=0,
+                                         highlightthickness=0, padx=40, pady=40, command=lambda: toggle("sound_effects"))
     button_toggle_sound_effects.place(x=25, y=80)
 
-    button_reset_config = Button(image=resetConfigButtonPicture, bd=0, highlightthickness=0, padx=28, pady=28, command=resetConfig)
+    button_reset_config_picture = get_picture("buttons\\reset_config.png")
+    button_reset_config = Button(image=button_reset_config_picture, bd=0, highlightthickness=0, padx=28, pady=28,
+                                 command=reset_config)
     button_reset_config.place(x=26, y=131)
 
-    volume_control = Scale(from_=1, to=100, orient=HORIZONTAL, length=140, width=10, bd=0, bg="#ba0308", activebackground="#ba0308", troughcolor="white",sliderrelief="flat", sliderlength=20, showvalue=0,  highlightthickness=2, highlightbackground="black", command=setVolume)
-    volume_control.set(Utils.getSettingValue("volume"))
-    volume_control.place(x=25, y=180)
+    scale_volume_control = Scale(from_=1, to=100, orient=HORIZONTAL, length=140, width=10, bd=0, bg="#ba0308",
+                                 activebackground="#ba0308", troughcolor="white", sliderrelief="flat", sliderlength=20,
+                                 showvalue=0, highlightthickness=2, highlightbackground="black", command=set_volume)
+    scale_volume_control.set(Utils.get_setting_value("volume"))
+    scale_volume_control.place(x=25, y=180)
 
-    #                          Loop the frame                           #
+    # Loop the frame
 
     root.mainloop()

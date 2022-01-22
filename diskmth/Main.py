@@ -2,14 +2,16 @@ import Utils
 from threading import Thread
 
 if __name__ == '__main__':
-    GUIThread = Thread(target=Utils.launchGUI, name="GUIThread")
-    SoundThread = Thread(target=Utils.launchSounds, args=(GUIThread, ), name="SoundThread")
-    SettingsThread = Thread(target=Utils.checkConfig, args=(GUIThread, ), name="SettingsThread")
+    Utils.load_config()
+    Utils.check_config()
 
-    GUIThread.start()
-    SoundThread.start()
-    SettingsThread.start()
+    gui_thread = Thread(target=Utils.launch_gui, name="GUIThread")
+    sound_thread = Thread(target=Utils.launch_sounds, args=(gui_thread, ), name="SoundThread")
 
-    GUIThread.join()
-    SoundThread.join()
-    SettingsThread.join()
+    gui_thread.start()
+    sound_thread.start()
+
+    gui_thread.join()
+    sound_thread.join()
+
+    Utils.save_config()

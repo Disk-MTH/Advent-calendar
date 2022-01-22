@@ -7,6 +7,28 @@ of the environment or for the build of the project. So you can use this project
 on any windows computer. (If you are ever asked for permissions open an 
 issue so I can see what this is due to)
 
+### Last commit change
+ 1) Complete overhaul of the configuration system:
+
+    Before the configuration was in the resource files so that when the project was compiled the configuration was in the executable's temporary working folder. 
+    This had 2 consequences:
+       - First, when the project was compiled, the configuration was not saved because it was not put back into the executable (which is normal)
+       - Second thing, the configuartion was synchronized at the outset which caused bugs in some cases
+ 
+    Now the configuration is only synchronized when starting and stopping the program and it is saved in the
+    following path: "% USERPROFILE% / AppData / Roaming / Advent-calendar / settings.txt". So now if you change the configuration, close 
+    the program and then reopen it, you will still have your settings saved.
+ 
+
+ 2) Major rewrite of the code and application of the PEP8 conventions:
+
+    The code is much lighter than before and in addition to redoing the configuration system, I have also greatly improved the functions relating to the configuration verification
+
+
+ 3) Partial addition of the GUI relating to the day buttons:
+    
+    The buttons are functional and open a GUi but which is absolutely not finished. For the moment the only way to quit this GUI and crash the program
+
 ## Presentation
 This github repository is a remake of my "[Christmas card](https://github.com/Disk-MTH/Christmas-card)" project resulting from a work requested in a maths 
 lesson. The original project was fun to make but this version lets you tweak what's behind the calendar boxes.  In this projects I therefore use tkinter for the GUI, pygame for sounds, threading for concurrent 

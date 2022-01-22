@@ -1,136 +1,210 @@
-from time import sleep
+import time
 import pygame
 import MainGUI
 import os
 import sys
 
-def getResourcesPath(relativePath):
+global music
+global sound_effects
+global volume
+global lines
+
+
+def get_resources_path(relative_path):
     try:
-        fileName = relativePath.split("\\")[-1]
+        file_name = relative_path.split("\\")[-1]
         base_path = sys._MEIPASS
-        return os.path.join(base_path + "\\" + fileName)
+        return os.path.join(base_path + "\\" + file_name)
     except Exception:
+        # change exception
         base_path = os.path.realpath(__file__)
         base_path = base_path.replace("\\Utils.py", "")
-        return os.path.join(base_path + "\\" + relativePath)
+        return os.path.join(base_path + "\\" + relative_path)
 
-def getSettingValue(settingToGet) :
-    with open(getResourcesPath("resources\\settings.txt"), "r") as file:
-        lines = file.read().split()
-        if settingToGet == "music":
-            if lines[2] == "enable":
-                return True
-            elif lines[2] == "disable":
-                return False
-        elif settingToGet == "sound_effects":
-            if lines[6] == "enable":
-                return True
-            elif lines[6] == "disable":
-                return False
-        elif settingToGet == "volume":
-            return str(lines[9])
 
-def setSettingValue(settingToSet, value):
-    with open(getResourcesPath("resources\\settings.txt"), "rt") as file:
-        fileContent = file.read()
+def get_config_path():
+    return os.environ["USERPROFILE"] + "\\AppData\\Roaming\\Advent-calendar\\"
 
-    if settingToSet == "music":
-        if value == "toggleOn":
-            with open(getResourcesPath("resources\\settings.txt"), "wt") as file:
-                fileContent = fileContent.replace("music : disable", "music : enable")
-                file.write(fileContent)
-        elif value == "toggleOff":
-            with open(getResourcesPath("resources\\settings.txt"), "wt") as file:
-                fileContent = fileContent.replace("music : enable", "music : disable")
-                file.write(fileContent)
 
-    elif settingToSet == "sound_effects":
-        if value == "toggleOn":
-            with open(getResourcesPath("resources\\settings.txt"), "wt") as file:
-                fileContent = fileContent.replace("sound effects : disable", "sound effects : enable")
-                file.write(fileContent)
-        elif value == "toggleOff":
-            with open(getResourcesPath("resources\\settings.txt"), "wt") as file:
-                fileContent = fileContent.replace("sound effects : enable", "sound effects : disable")
-                file.write(fileContent)
+def load_config():
+    global lines
 
-    elif settingToSet == "volume":
-        with open(getResourcesPath("resources\\settings.txt"), "r") as file:
-            lines = file.read().split()
-            volume = lines[9]
-            with open(getResourcesPath("resources\\settings.txt"), "wt") as file:
-                fileContent = fileContent.replace("volume : " + str(volume), "volume : " + str(value))
-                file.write(fileContent)
+    try:
+        os.mkdir(get_config_path())
+    except FileExistsError:
+        pass
 
-def resetConfig():
-    with open(getResourcesPath("resources\\settings.txt"), "wt") as file:
-        defaultSettings = ["music : enable\n", "sound effects : enable\n", "volume : 80\n"]
+    try:
+        with open(get_config_path() + "settings.txt", "r") as file:
+            lines = file.readlines()
+            lines[0] = lines[0].replace("\n", "")
+            lines[1] = lines[1].replace("\n", "")
+            lines[2] = lines[2].replace("\n", "")
+    except FileNotFoundError:
+        create_config()
+        with open(get_config_path() + "settings.txt", "r") as file:
+            lines = file.readlines()
+            lines[0] = lines[0].replace("\n", "")
+            lines[1] = lines[1].replace("\n", "")
+            lines[2] = lines[2].replace("\n", "")
+
+
+def check_config():
+    global music
+    global sound_effects
+    global volume
+    global lines
+
+    if lines[0][:8] == "music : ":
+        if lines[0][8:] == "enable":
+            music = True
+        elif lines[0][8:] == "disable":
+            music = False
+        else:
+            create_config()
+            load_config()
+            check_config()
+    else:
+        create_config()
+        load_config()
+        check_config()
+
+    if lines[1][:16] == "sound effects : ":
+        if lines[1][16:] == "enable":
+            sound_effects = True
+        elif lines[1][16:] == "disable":
+            sound_effects = False
+        else:
+            create_config()
+            load_config()
+            check_config()
+    else:
+        create_config()
+        load_config()
+        check_config()
+
+    if lines[2][:9] == "volume : ":
+        if 0 <= int(lines[2][9:]) <= 100:
+            volume = lines[2][9:]
+        else:
+            create_config()
+            load_config()
+            check_config()
+    else:
+        create_config()
+        load_config()
+        check_config()
+
+
+def create_config():
+    with open((get_config_path() + "settings.txt"), "w") as file:
+        default_settings = ["music : enable\n", "sound effects : enable\n", "volume : 80\n"]
         index = 0
-        for i in range(len(defaultSettings)):
-            lineToWrite = defaultSettings[index]
-            file.write(lineToWrite)
+        for i in range(len(default_settings)):
+            line_to_write = default_settings[index]
+            file.write(line_to_write)
             index += 1
 
-def buttonClick(nameOfButton):
-    click_sound = pygame.mixer.Sound(getResourcesPath("resources\\sounds\\click_sound.mp3"))
-    if getSettingValue("sound_effects"):
-        if "day" in nameOfButton:
-            click_sound.set_volume(float((int(getSettingValue("volume")) / 100)))
-            click_sound.play()
+
+def save_config():
+    global music
+    global sound_effects
+    global volume
+
+    with open((get_config_path() + "settings.txt"), "w") as file:
+        if music:
+            music = "music : enable\n"
         else:
-            click_sound.set_volume(float((int(getSettingValue("volume")) / 100)))
+            music = "music : disable\n"
+
+        if sound_effects:
+            sound_effects = "sound effects : enable\n"
+        else:
+            sound_effects = "sound effects : disable\n"
+
+        volume = "volume : " + str(volume) + "\n"
+        settings = [music, sound_effects, volume]
+        index = 0
+        for i in range(len(settings)):
+            line_to_write = settings[index]
+            file.write(line_to_write)
+            index += 1
+
+
+def reset_config():
+    global music
+    global sound_effects
+    global volume
+
+    music = True
+    sound_effects = True
+    volume = "80"
+
+
+def get_setting_value(setting_to_get):
+    global music
+    global sound_effects
+    global volume
+
+    if setting_to_get == "music":
+        return music
+    elif setting_to_get == "sound_effects":
+        return sound_effects
+    elif setting_to_get == "volume":
+        return volume
+
+
+def set_setting_value(setting_to_set, value):
+    global music
+    global sound_effects
+    global volume
+
+    if setting_to_set == "music":
+        music = value
+    elif setting_to_set == "sound_effects":
+        sound_effects = value
+    elif setting_to_set == "volume":
+        volume = value
+
+
+def button_click_sound(is_day_button):
+    global volume
+    click_sound = pygame.mixer.Sound(get_resources_path("resources\\sounds\\click_sound.mp3"))
+    if get_setting_value("sound_effects"):
+        if is_day_button:
+            click_sound.set_volume(float((int(get_setting_value("volume")) / 100)))
+            click_sound.play()
+            # add effect for case opening
+        else:
+            click_sound.set_volume(float((int(get_setting_value("volume")) / 100)))
             click_sound.play()
 
-    elif not getSettingValue("sound_effects"):
-        if "day" in nameOfButton:
-            pass
-        else:
-            pass
 
-def launchGUI():
-    MainGUI.mainGUI()
+def launch_gui():
+    MainGUI.main_gui()
 
-def launchSounds(GUIThread):
-    isMusicActive = False
+
+def launch_sounds(gui_thread):
+    global music
+    global volume
+    is_music_enable = False
+    is_music_active = False
+
     pygame.mixer.init()
-    while GUIThread.is_alive():
 
-        with open(getResourcesPath("resources\\settings.txt"), "r") as file:
-            lines = file.read().split()
-            isMusicEnable = False
-            if lines[2] == "enable":
-                isMusicEnable = True
-            elif lines[2] == "disable":
-                isMusicEnable = False
-            volume = lines[9]
+    while gui_thread.is_alive():
+        if music:
+            is_music_enable = True
+        else:
+            is_music_enable = False
 
-        pygame.mixer.music.set_volume(float((int(volume)/ 100)))
-        if isMusicEnable and not isMusicActive:
-            pygame.mixer.music.load(getResourcesPath("resources\\sounds\\background_music.mp3"))
+        pygame.mixer.music.set_volume(float((int(volume) / 100)))
+
+        if is_music_enable and not is_music_active:
+            pygame.mixer.music.load(get_resources_path("resources\\sounds\\background_music.mp3"))
             pygame.mixer.music.play()
-            isMusicActive = True
-        elif not isMusicEnable and isMusicActive:
+            is_music_active = True
+        elif not is_music_enable and is_music_active:
             pygame.mixer.music.stop()
-            isMusicActive = False
-        sleep(0.25)
-
-def checkConfig(GUIThread):
-    while GUIThread.is_alive():
-        with open(getResourcesPath("resources\\settings.txt"), "r") as file:
-            lines = file.read().split()
-            try:
-                if lines[0] + " " + lines[1] + " " != "music : ":
-                    resetConfig()
-                if (lines[2] != "enable") and (lines[2] != "disable"):
-                    resetConfig()
-                if lines[3] + " " + lines[4] + " " + lines[5] + " " != "sound effects : ":
-                    resetConfig()
-                if (lines[6] != "enable") and (lines[6] != "disable"):
-                    resetConfig()
-                if lines[7] + " " + lines[8] + " " != "volume : ":
-                    resetConfig()
-                if (int(lines[9]) > 100) or (int(lines[9]) < 1):
-                    resetConfig()
-            except IndexError:
-                resetConfig()
-        sleep(0.25)
+            is_music_active = False
+        time.sleep(0.6)
