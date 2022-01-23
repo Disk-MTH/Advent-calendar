@@ -16,7 +16,6 @@ def get_resources_path(relative_path):
         base_path = sys._MEIPASS
         return os.path.join(base_path + "\\" + file_name)
     except Exception:
-        # change exception
         base_path = os.path.realpath(__file__)
         base_path = base_path.replace("\\Utils.py", "")
         return os.path.join(base_path + "\\" + relative_path)

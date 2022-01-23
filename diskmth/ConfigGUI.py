@@ -17,11 +17,9 @@ def config_gui():
 
     def get_picture(path):
         try:
-            print("aaa"
-                  "")
             return PhotoImage(file=Utils.get_resources_path("resources\\" + path))
         except TclError:
-            print("called")
+            pass
 
     def move_frame(event):
         x, y = event.x - last_click_x + root.winfo_x(), event.y - last_click_y + root.winfo_y()
@@ -41,11 +39,8 @@ def config_gui():
         root.destroy()
         MainGUI.main_gui()
 
-    sound_on_picture = PhotoImage(file=get_picture("buttons\\sound_on.png"))
-    sound_off_picture = PhotoImage(file=get_picture("buttons\\sound_off.png"))
-
-    #sound_on_picture = PhotoImage(file=Utils.get_resources_path("resources\\" + "buttons\\sound_on.png"))
-    #sound_off_picture = PhotoImage(file=Utils.get_resources_path("resources\\" + "buttons\\sound_off.png"))
+    sound_on_picture = PhotoImage(file=Utils.get_resources_path("resources\\" + "buttons\\sound_on.png"))
+    sound_off_picture = PhotoImage(file=Utils.get_resources_path("resources\\" + "buttons\\sound_off.png"))
 
     def get_picture_for_toggle_buttons(button):
         if button == "music":

@@ -1,41 +1,17 @@
 # Advent calendar
-This project is under development, so it is not complete. All that is indicated below is 
-therefore not yet contractual.
 
 This project does not require any administrator permission, either for the setup 
 of the environment or for the build of the project. So you can use this project 
 on any windows computer. (If you are ever asked for permissions open an 
 issue so I can see what this is due to)
 
-### Last commit change
- 1) Complete overhaul of the configuration system:
-
-    Before the configuration was in the resource files so that when the project was compiled the configuration was in the executable's temporary working folder. 
-    This had 2 consequences:
-       - First, when the project was compiled, the configuration was not saved because it was not put back into the executable (which is normal)
-       - Second thing, the configuartion was synchronized at the outset which caused bugs in some cases
- 
-    Now the configuration is only synchronized when starting and stopping the program and it is saved in the
-    following path: "% USERPROFILE% / AppData / Roaming / Advent-calendar / settings.txt". So now if you change the configuration, close 
-    the program and then reopen it, you will still have your settings saved.
- 
-
- 2) Major rewrite of the code and application of the PEP8 conventions:
-
-    The code is much lighter than before and in addition to redoing the configuration system, I have also greatly improved the functions relating to the configuration verification
-
-
- 3) Partial addition of the GUI relating to the day buttons:
-    
-    The buttons are functional and open a GUi but which is absolutely not finished. For the moment the only way to quit this GUI and crash the program
-
 ## Presentation
 This github repository is a remake of my "[Christmas card](https://github.com/Disk-MTH/Christmas-card)" project resulting from a work requested in a maths 
 lesson. The original project was fun to make but this version lets you tweak what's behind the calendar boxes.  In this projects I therefore use tkinter for the GUI, pygame for sounds, threading for concurrent 
 programming, all under python 3.10.0. I have also added a settings backup 
 system, so when you reopen the app after changing your settings, they will be 
-kept. In addition, the configuration is self-checked so if you ever modify the file 
-anyhow, or delete it the default settings will be reset. The application is also 
+kept. The configuration is not kept from one machine to another because it is saved in your AppData but if you ever create another version of the application, the already existing configuration will work.
+If you manually modify the configuration while the program is running, it will not be synchronized (because once loaded the configuration is kept in buffer during execution) and will be overwritten by the automatic save when the application is closed .The application is also 
 multi-threaded: the image, the sound and the configuration management 
 system are completely independent in their operation but if the GUI thread stops 
 (when you close the application), everything is stops.
@@ -122,7 +98,10 @@ your images to ".ico" format, I recommend the "[convertio](https://convertio.co/
 
 4) Pictures behind the day buttons :
 
-soon ...
+To modify the images of the days, you must put your images in the "[day](https://github.com/Disk-MTH/Advent-calendar/tree/master/diskmth/resources/day)" folder which is in the path "youtProjectPath/diskmth/resources/day" named according to the 
+following model: "day_(the date).png" ( par example for day 1 you must call the image "day_1.png"). The "perfect" format is 700x350 pixels but if you put another size, 
+the image will be automatically resized. Don't delete the "[not_found.png](https://github.com/Disk-MTH/Advent-calendar/blob/master/diskmth/resources/day/not_found.png)" image (I made sure that if you did, the app wouldn't crash) because it appears if the image of the day isn't found, 
+but if you delete and qu 'an image is not loaded you will not know if it is because it does not have the right name or because the codec of the image is not in the right format.
 
 ## Pictures
 MainGUI :

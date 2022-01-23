@@ -98,99 +98,99 @@ def main_gui():
                           highlightthickness=0, padx=40, pady=40, command=close_frame)
     button_close.place(x=960, y=0)
 
-    button_day_1_picture = get_picture("buttons\\days\\day_1.png")
+    button_day_1_picture = get_picture("buttons\\days\\button_day_1.png")
     button_day_1 = create_a_button(button_day_1_picture, 1)
     button_day_1.place(x=547, y=68)
 
-    button_day_2_picture = get_picture("buttons\\days\\day_2.png")
+    button_day_2_picture = get_picture("buttons\\days\\button_day_2.png")
     button_day_2 = create_a_button(button_day_2_picture, 2)
     button_day_2.place(x=48, y=213)
 
-    button_day_3_picture = get_picture("buttons\\days\\day_3.png")
+    button_day_3_picture = get_picture("buttons\\days\\button_day_3.png")
     button_day_3 = create_a_button(button_day_3_picture, 3)
     button_day_3.place(x=214, y=213)
 
-    button_day_4_picture = get_picture("buttons\\days\\day_4.png")
+    button_day_4_picture = get_picture("buttons\\days\\button_day_4.png")
     button_day_4 = create_a_button(button_day_4_picture, 4)
     button_day_4.place(x=381, y=362)
 
-    button_day_5_picture = get_picture("buttons\\days\\day_5.png")
+    button_day_5_picture = get_picture("buttons\\days\\button_day_5.png")
     button_day_5 = create_a_button(button_day_5_picture, 5)
     button_day_5.place(x=381, y=511)
 
-    button_day_6_picture = get_picture("buttons\\days\\day_6.png")
+    button_day_6_picture = get_picture("buttons\\days\\button_day_6.png")
     button_day_6 = create_a_button(button_day_6_picture, 6)
     button_day_6.place(x=548, y=218)
 
-    button_day_7_picture = get_picture("buttons\\days\\day_7.png")
+    button_day_7_picture = get_picture("buttons\\days\\button_day_7.png")
     button_day_7 = create_a_button(button_day_7_picture, 7)
     button_day_7.place(x=712, y=67)
 
-    button_day_8_picture = get_picture("buttons\\days\\day_8.png")
+    button_day_8_picture = get_picture("buttons\\days\\button_day_8.png")
     button_day_8 = create_a_button(button_day_8_picture, 8)
     button_day_8.place(x=547, y=360)
 
-    button_day_9_picture = get_picture("buttons\\days\\day_9.png")
+    button_day_9_picture = get_picture("buttons\\days\\button_day_9.png")
     button_day_9 = create_a_button(button_day_9_picture, 9)
     button_day_9.place(x=214, y=506)
 
-    button_day_10_picture = get_picture("buttons\\days\\day_10.png")
+    button_day_10_picture = get_picture("buttons\\days\\button_day_10.png")
     button_day_10 = create_a_button(button_day_10_picture, 10)
     button_day_10.place(x=712, y=360)
 
-    button_day_11_picture = get_picture("buttons\\days\\day_11.png")
+    button_day_11_picture = get_picture("buttons\\days\\button_day_11.png")
     button_day_11 = create_a_button(button_day_11_picture, 11)
     button_day_11.place(x=48, y=506)
 
-    button_day_12_picture = get_picture("buttons\\days\\day_12.png")
+    button_day_12_picture = get_picture("buttons\\days\\button_day_12.png")
     button_day_12 = create_a_button(button_day_12_picture, 12)
     button_day_12.place(x=880, y=219)
 
-    button_day_13_picture = get_picture("buttons\\days\\day_13.png")
+    button_day_13_picture = get_picture("buttons\\days\\button_day_13.png")
     button_day_13 = create_a_button(button_day_13_picture, 13)
     button_day_13.place(x=880, y=360)
 
-    button_day_14_picture = get_picture("buttons\\days\\day_14.png")
+    button_day_14_picture = get_picture("buttons\\days\\button_day_14.png")
     button_day_14 = create_a_button(button_day_14_picture, 14)
     button_day_14.place(x=713, y=214)
 
-    button_day_15_picture = get_picture("buttons\\days\\day_15.png")
+    button_day_15_picture = get_picture("buttons\\days\\button_day_15.png")
     button_day_15 = create_a_button(button_day_15_picture, 15)
     button_day_15.place(x=380, y=67)
 
-    button_day_16_picture = get_picture("buttons\\days\\day_16.png")
+    button_day_16_picture = get_picture("buttons\\days\\button_day_16.png")
     button_day_16 = create_a_button(button_day_16_picture, 16)
     button_day_16.place(x=213, y=358)
 
-    button_day_17_picture = get_picture("buttons\\days\\day_17.png")
+    button_day_17_picture = get_picture("buttons\\days\\button_day_17.png")
     button_day_17 = create_a_button(button_day_17_picture, 17)
     button_day_17.place(x=879, y=67)
 
-    button_day_18_picture = get_picture("buttons\\days\\day_18.png")
+    button_day_18_picture = get_picture("buttons\\days\\button_day_18.png")
     button_day_18 = create_a_button(button_day_18_picture, 18)
     button_day_18.place(x=49, y=361)
 
-    button_day_19_picture = get_picture("buttons\\days\\day_19.png")
+    button_day_19_picture = get_picture("buttons\\days\\button_day_19.png")
     button_day_19 = create_a_button(button_day_19_picture, 19)
     button_day_19.place(x=381, y=213)
 
-    button_day_20_picture = get_picture("buttons\\days\\day_20.png")
+    button_day_20_picture = get_picture("buttons\\days\\button_day_20.png")
     button_day_20 = create_a_button(button_day_20_picture, 20)
     button_day_20.place(x=214, y=68)
 
-    button_day_21_picture = get_picture("buttons\\days\\day_21.png")
+    button_day_21_picture = get_picture("buttons\\days\\button_day_21.png")
     button_day_21 = create_a_button(button_day_21_picture, 21)
     button_day_21.place(x=48, y=68)
 
-    button_day_22_picture = get_picture("buttons\\days\\day_22.png")
+    button_day_22_picture = get_picture("buttons\\days\\button_day_22.png")
     button_day_22 = create_a_button(button_day_22_picture, 22)
     button_day_22.place(x=712, y=506)
 
-    button_day_23_picture = get_picture("buttons\\days\\day_23.png")
+    button_day_23_picture = get_picture("buttons\\days\\button_day_23.png")
     button_day_23 = create_a_button(button_day_23_picture, 23)
     button_day_23.place(x=877, y=505)
 
-    button_day_24_picture = get_picture("buttons\\days\\day_24.png")
+    button_day_24_picture = get_picture("buttons\\days\\button_day_24.png")
     button_day_24 = create_a_button(button_day_24_picture, 24)
     button_day_24.place(x=547, y=510)
 
