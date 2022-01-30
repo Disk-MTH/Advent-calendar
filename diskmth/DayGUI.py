@@ -69,7 +69,7 @@ def day_gui(day_date):
     root.wm_attributes("-topmost", True)
     root.geometry("700x400")
     root.resizable(width=False, height=False)
-    root.iconbitmap(Utils.get_resources_path("resources\\icons\\app_icon.ico"))
+    root.iconbitmap(Utils.get_resources_path("resources\\icon\\app_icon.ico"))
     root.bind("<Map>", mapped_frame)
 
     # Add components to frame

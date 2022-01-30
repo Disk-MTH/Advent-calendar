@@ -3,37 +3,41 @@ import os
 import shutil
 
 
-def getAllResourcesPath():
-    path1 = "..\\diskmth\\resources\\*.*"
-    path2 = "..\\diskmth\\resources\\*\\*.*"
-    path3 = "..\\diskmth\\resources\\*\\*\\*.*"
-    filesPath = []
-    for i in glob.glob(path1):
-        filesPath.append(os.path.abspath(i))
-    for i in glob.glob(path2):
-        filesPath.append(os.path.abspath(i))
-    for i in glob.glob(path3): 
-        filesPath.append(os.path.abspath(i))
-    return filesPath
+def get_all_resources():
+    path_1 = "..\\diskmth\\resources\\*.*"
+    path_2 = "..\\diskmth\\resources\\*\\*.*"
+    path_3 = "..\\diskmth\\resources\\*\\*\\*.*"
+    files_path = []
 
-def getFullCommand():
-    resourcesList = getAllResourcesPath()
+    for i in glob.glob(path_1):
+        files_path.append(os.path.abspath(i))
+    for i in glob.glob(path_2):
+        files_path.append(os.path.abspath(i))
+    for i in glob.glob(path_3):
+        files_path.append(os.path.abspath(i))
+    return files_path
+
+
+def get_full_command():
+    resources_list = get_all_resources()
+
     command = "--onefile --windowed --clean --name \"Advent calendar\""
     command = "\"" + os.path.abspath("..\\python\\Scripts\\pyinstaller.exe").replace("\\", "/") + "\" " + command
     command = "\"" + os.path.abspath("..\\python\\python.exe").replace("\\", "/") + "\" " + command
 
-    if os.path.exists("..\\diskmth\\resources\\icons\\app_icon.ico"):
-        command = command + " --icon \"" + os.path.abspath("..\\diskmth\\resources\\icons\\app_icon.ico").replace("\\", "/") + "\""
+    if os.path.exists("..\\diskmth\\resources\\icon\\app_icon.ico"):
+        command = command + " --icon \"" + os.path.abspath("..\\diskmth\\resources\\icon\\app_icon.ico")\
+            .replace("\\", "/") + "\""
 
-    for i in range(len(resourcesList)):
-        command = command + " --add-data \"" + resourcesList[i].replace("\\", "/") + ";.\""
+    for i in range(len(resources_list)):
+        command = command + " --add-data \"" + resources_list[i].replace("\\", "/") + ";.\""
 
-    command = command +  " --collect-data \"pygame\""
     command = command + " \"" + os.path.abspath("..\\diskmth\\Main.py") + "\""
+
     return command
 
+
 if __name__ == '__main__':
-    pythonPath = "\"" + os.path.abspath("..\\python\\python.exe").replace("\\", "/") + "\""
     os.chdir("..")
     try:
         os.mkdir("build")
@@ -41,5 +45,5 @@ if __name__ == '__main__':
         shutil.rmtree("build")
         os.mkdir("build")
     os.chdir("build")
-    os.system("\"" + getFullCommand() + "\"")
+    os.system("\"" + get_full_command() + "\"")
     os.system("pause")

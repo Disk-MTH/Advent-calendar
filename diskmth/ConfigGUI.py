@@ -98,7 +98,7 @@ def config_gui():
     root.wm_attributes("-topmost", 1)
     root.geometry("200x200")
     root.resizable(width=False, height=False)
-    root.iconbitmap(Utils.get_resources_path("resources\\icons\\app_icon.ico"))
+    root.iconbitmap(Utils.get_resources_path("resources\\icon\\app_icon.ico"))
     root.bind("<Map>", mapped_frame)
 
     # Add components to frame
